@@ -1,0 +1,103 @@
+[
+  {
+    "id": "go-fundamentals",
+    "title": "Go Fundamentals",
+    "description": "Introduction to the structure, logic, and basics of Golang.",
+    "exercises": [
+      {
+        "id": "fund-1",
+        "title": "01. Introduction",
+        "description": "Write a Hello World program.",
+        "boilerplate": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\t// Print exactly \"Welcome to Go Fundamentals!\"\n}\n",
+        "expectedOutput": "Welcome to Go Fundamentals!\n"
+      }
+    ]
+  },
+  {
+    "id": "go-reloaded",
+    "title": "Go-Reloaded",
+    "description": "Challenge set tackling basic string manipulation, parsing, loops, and conditions.",
+    "exercises": [
+      {
+        "id": "q1",
+        "title": "01. Join With Punctuation",
+        "description": "Write a function that fixes spacing around punctuation for a simple case.\nGiven a slice of tokens (words + punctuation), remove the space before punctuation marks.\n\nRequirement: Please use a variable named 'result' for the output string, and loop with 'i, token'.",
+        "boilerplate": "// Requirement: Please use a variable named 'result' for the output string, \n// and loop with 'i, token'.\n\npackage main\n\nimport (\n\t\"fmt\"\n)\n\n// Example - Input: [\"hello\", \",\", \"world\", \"!\"] -> Expected Output: \"hello, world!\"\nfunc joinWithPunctuation(tokens []string) string {\n\t// your code here\n\treturn \"\"\n}\n\nfunc main() {\n\ttokens := []string{\"hello\", \",\", \"world\", \"!\"}\n\tfmt.Printf(\"joinWithPunctuation(...) -> %q\\n\", joinWithPunctuation(tokens))\n}\n\nfunc isPunctuation(s string) bool {\n\tpunctuations := []string{\".\", \",\", \"!\", \"?\", \":\", \";\"}\n\tfor _, p := range punctuations {\n\t\tif s == p {\n\t\t\treturn true\n\t\t}\n\t}\n\treturn false\n}\n",
+        "expectedOutput": "joinWithPunctuation(...) -> \"hello, world!\"\n",
+        "requiredCodeRegex": ["\\bresult\\b", "i,\\s*token"]
+      },
+      {
+        "id": "q2",
+        "title": "02. Binary to Decimal",
+        "description": "Write a function that converts a binary string to decimal.\n\nRequirement:\nYou must use the variable names 'result' and 'err' inside your function.",
+        "boilerplate": "// Requirement:\n// You must use the variable names 'result' and 'err' inside your function.\n\npackage main\n\nimport (\n\t\"fmt\"\n\t\"strconv\"\n)\n\n// Example 1 - Input: \"10\" -> Expected Output: 2\n// Example 2 - Input: \"1010\" -> Expected Output: 10\n// Example 3 - Input: \"11111111\" -> Expected Output: 255\nfunc binToDecimal(binStr string) (int64, error) {\n\t// your code here\n\treturn 0, nil\n}\n\nfunc main() {\n\tres, err := binToDecimal(\"10\")\n\tfmt.Printf(\"binToDecimal(\\\"10\\\") -> %v, %v\\n\", res, err)\n\tres, err = binToDecimal(\"11111111\")\n\tfmt.Printf(\"binToDecimal(\\\"11111111\\\") -> %v, %v\\n\", res, err)\n}\n",
+        "expectedOutput": "binToDecimal(\"10\") -> 2, <nil>\nbinToDecimal(\"11111111\") -> 255, <nil>\n",
+        "requiredCodeRegex": ["\\bresult\\b", "\\berr\\b"]
+      },
+      {
+        "id": "q3",
+        "title": "03. Hexadecimal to Decimal",
+        "description": "Write a function that converts a hexadecimal string to its decimal integer value.\nUse strconv.ParseInt directly; use it, but explain what base and bitSize mean by writing a comment in the file.\n\nRequirement:\nYou must use the variable names 'result' and 'err' inside your function.",
+        "boilerplate": "// Requirement:\n// You must use the variable names 'result' and 'err' inside your function.\n\npackage main\n\nimport (\n\t\"fmt\"\n\t\"strconv\"\n)\n\n// Example 1 - Input: \"1E\"  -> Expected Output: 30\n// Example 2 - Input: \"FF\"  -> Expected Output: 255\nfunc hexToDecimal(hexStr string) (int64, error) {\n\t// your code here\n\treturn 0, nil\n}\n\nfunc main() {\n\tres, err := hexToDecimal(\"1E\")\n\tfmt.Printf(\"hexToDecimal(\\\"1E\\\") -> %v, %v\\n\", res, err)\n\tres, err = hexToDecimal(\"FF\")\n\tfmt.Printf(\"hexToDecimal(\\\"FF\\\") -> %v, %v\\n\", res, err)\n}\n",
+        "expectedOutput": "hexToDecimal(\"1E\") -> 30, <nil>\nhexToDecimal(\"FF\") -> 255, <nil>\n",
+        "requiredCodeRegex": ["\\bresult\\b", "\\berr\\b", "(base|bitSize)"]
+      },
+      {
+        "id": "q4",
+        "title": "04. Explain strings.Fields()",
+        "description": "Explain what strings.Fields() does and why it's useful in this project.\nWrite your explanation in the comments, you must reach the minimum word count.",
+        "boilerplate": "// Explain what strings.Fields() does and why it's useful in this project\n// Write your answer here:\n",
+        "expectedOutput": "",
+        "isSubjective": true,
+        "minWords": 20,
+        "requiredCodeRegex": ["(?:strings\\.Fields|Fields)"]
+      },
+      {
+        "id": "q5",
+        "title": "05. Check Punctuation",
+        "description": "Write a function that checks if a string is a punctuation mark from the projects list.\n\nRequirement:\nPlease use a variable named 'punctuations' for the array, and 'p' in the loop.",
+        "boilerplate": "// Requirement:\n// Please use a variable named 'punctuations' for the array, and 'p' in the loop.\n\npackage main\n\nimport (\n\t\"fmt\"\n)\n\n// Example 1 - Input: \",\" -> Expected Output: true\n// Example 2 - Input: \"!\" -> Expected Output: true\n// Example 3 - Input: \"x\" -> Expected Output: false\nfunc isPunctuation(s string) bool {\n\t// your code here\n\treturn false\n}\n\nfunc main() {\n\tfmt.Printf(\"isPunctuation(\\\",\\\") -> %v\\n\", isPunctuation(\",\"))\n\tfmt.Printf(\"isPunctuation(\\\"x\\\") -> %v\\n\", isPunctuation(\"x\"))\n}\n",
+        "expectedOutput": "isPunctuation(\",\") -> true\nisPunctuation(\"x\") -> false\n",
+        "requiredCodeRegex": ["\\bpunctuations\\b", "\\bp\\b"]
+      },
+      {
+        "id": "q6",
+        "title": "06. Fix Single Quotes",
+        "description": "Write a function that fixes spacing inside single quotes.\n\nRequirement:\nDeclare the exact variables: 'result', 'match', and 'inner'.",
+        "boilerplate": "// Requirement:\n// Declare the exact variables: 'result', 'match', and 'inner'.\n\npackage main\n\nimport (\n\t\"fmt\"\n\t\"regexp\"\n)\n\n// Example 1 - Input: \"' awesome '\" -> Expected Output: \"'awesome'\"\n// Example 2 - Input: \"' hello world '\" -> Expected Output: \"'hello world'\"\nfunc fixSingleQuotes(text string) string {\n\t// your code here\n\treturn \"\"\n}\n\nfunc main() {\n\tfmt.Printf(\"fixSingleQuotes(...) -> %q\\n\", fixSingleQuotes(\"' awesome '\"))\n\tfmt.Printf(\"fixSingleQuotes(...) -> %q\\n\", fixSingleQuotes(\"' hello world '\"))\n}\n",
+        "expectedOutput": "fixSingleQuotes(...) -> \"'awesome'\"\nfixSingleQuotes(...) -> \"'hello world'\"\n",
+        "requiredCodeRegex": ["\\bresult\\b", "\\bmatch\\b", "\\binner\\b"]
+      },
+      {
+        "id": "q7",
+        "title": "07. Uppercase Last N",
+        "description": "Write a function that takes a slice of words and applies uppercase to the last N words.\n\nRequirement:\nPlease use a variable named 'start' to track the starting index.",
+        "boilerplate": "// Requirement:\n// Please use a variable named 'start' to track the starting index.\n\npackage main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\n// Example - Input: words = [\"this\", \"is\", \"so\", \"exciting\"], n = 2\n// Expected Output: [\"this\", \"is\", \"SO\", \"EXCITING\"]\nfunc uppercaseLastN(words []string, n int) []string {\n\t// your code here\n\treturn nil \n}\n\nfunc main() {\n\twords := []string{\"this\", \"is\", \"so\", \"exciting\"}\n\t// Use %v since %q wraps quotes, just testing basic formatting:\n\tfmt.Printf(\"uppercaseLastN(..., 2) -> %q\\n\", uppercaseLastN(words, 2))\n}\n",
+        "expectedOutput": "uppercaseLastN(..., 2) -> [\"this\" \"is\" \"SO\" \"EXCITING\"]\n",
+        "requiredCodeRegex": ["\\bstart\\b"]
+      },
+      {
+        "id": "q8",
+        "title": "08. A or An",
+        "description": "Write a function that determines whether to use \"a\" or \"an\" before a given word.\n\nRequirement:\nName variables exactly: 'firstLetter', 'vowelsAndH' and loop using 'v'.",
+        "boilerplate": "// Requirement:\n// Name variables exactly: 'firstLetter', 'vowelsAndH' and loop using 'v'.\n\npackage main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\n// Example 1 - Input: \"apple\" -> Expected Output: \"an\"\n// Example 2 - Input: \"horse\" -> Expected Output: \"an\"\n// Example 3 - Input: \"book\" -> Expected Output: \"a\"\n// Example 4 - Input: \"honest\" -> Expected Output: \"an\" (starts with silent h)\nfunc aOrAn(nextWord string) string {\n\t// your code here\n\treturn \"\"\n}\n\nfunc main() {\n\tfmt.Printf(\"aOrAn(\\\"apple\\\") -> %q\\n\", aOrAn(\"apple\"))\n\tfmt.Printf(\"aOrAn(\\\"horse\\\") -> %q\\n\", aOrAn(\"horse\"))\n\tfmt.Printf(\"aOrAn(\\\"honest\\\") -> %q\\n\", aOrAn(\"honest\"))\n}\n",
+        "expectedOutput": "aOrAn(\"apple\") -> \"an\"\naOrAn(\"horse\") -> \"an\"\naOrAn(\"honest\") -> \"an\"\n",
+        "requiredCodeRegex": ["\\bfirstLetter\\b", "\\bvowelsAndH\\b", "\\bv\\b"]
+      }
+    ]
+  },
+  {
+    "id": "ascii-art",
+    "title": "ASCII-Art",
+    "description": "Learn parsing and advanced string manipulation by printing ASCII graphics.",
+    "exercises": [
+      {
+        "id": "ascii-1",
+        "title": "01. Print 'A'",
+        "description": "Write a program that prints the letter 'A' dynamically as ASCII art or just outputs 'A' followed by a newline for passing.",
+        "boilerplate": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\t// Print a generic 'A'\n}\n",
+        "expectedOutput": "A\n"
+      }
+    ]
+  }
+]

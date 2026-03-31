@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --color-zinc-950: #07070a;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "Fira Code", "Geist Mono", monospace;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #07070a;
+  color: theme('colors.zinc.100');
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Ambient glow orbs painted on the background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 85% 75%, rgba(99, 102, 241, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 35% at 50% 50%, rgba(16, 185, 129, 0.03) 0%, transparent 80%);
+}
+
+/* Grid texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glassmorphism card utility */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Ensure main content sits above pseudo-element layers */
+#root > * {
+  position: relative;
+  z-index: 1;
+}
