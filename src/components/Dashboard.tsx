@@ -166,6 +166,24 @@ export const Dashboard: React.FC<Props> = ({ challenges }) => {
         onConfirm={handleConfirm}
         onCancel={() => setConfirmTarget(null)}
       />
+
+      {/* Footer */}
+      <motion.footer
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8 }}
+        className="w-full max-w-4xl pb-10 flex items-center justify-center"
+      >
+        <div className="flex items-center gap-3 px-6 py-3 rounded-full border border-zinc-800/60 bg-white/[0.02] backdrop-blur-sm">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+          <p className="text-xs text-zinc-600 tracking-wide">
+            Built by{' '}
+            <span className="text-zinc-400 font-semibold">Sogo Ayenigba</span>
+            <span className="mx-2 text-zinc-700">|</span>
+            <span className="text-zinc-600 italic">For Internal Use</span>
+          </p>
+        </div>
+      </motion.footer>
     </div>
   );
 };
