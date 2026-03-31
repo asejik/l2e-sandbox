@@ -153,4 +153,4 @@ Advanced challenges focused on grid rendering and character manipulation.
 
 ## License
 
-Internal use only — Zone01 Kisumu.
+Internal use only - Sogo Ayenigba.
