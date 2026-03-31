@@ -2,7 +2,7 @@
 
 An interactive, AI-powered Go programming sandbox designed to teach and validate standard Go practices through a curriculum-driven, game-like learning experience.
 
-Built for internal use by the **Zone01 Kisumu** team.
+Built for internal use by **Sogo Ayenigba**.
 
 ---
 
