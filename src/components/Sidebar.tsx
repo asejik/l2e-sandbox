@@ -25,7 +25,7 @@ export const Sidebar: React.FC<Props> = ({ challenge }) => {
 
   return (
     <>
-      <div className="w-72 bg-zinc-950/80 backdrop-blur-xl flex-shrink-0 flex flex-col h-full border-r border-zinc-800/50 shadow-2xl z-20">
+      <div className="w-full md:w-72 bg-zinc-950/80 backdrop-blur-xl flex-shrink-0 flex flex-col h-full border-r border-zinc-800/50 shadow-2xl z-20">
         {/* Header */}
         <div className="p-5 pb-3 border-b border-zinc-800/40">
           <div className="flex items-center justify-between mb-4">

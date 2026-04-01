@@ -5,6 +5,7 @@ import { Dashboard } from './components/Dashboard';
 import { QuestionPanel } from './components/QuestionPanel';
 import { TerminalPane } from './components/TerminalPane';
 import { Sidebar } from './components/Sidebar';
+import { MobileIDE } from './components/MobileIDE';
 import { useAssessmentStore } from './store/useAssessmentStore';
 import type { Challenge } from './store/useAssessmentStore';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -40,14 +41,27 @@ function App() {
 
           return (
             <motion.div key="sandbox" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full h-screen flex bg-zinc-950 overflow-hidden">
-              <Sidebar challenge={activeChallenge} />
-              <div className="flex-1 min-w-0 h-full relative">
-                <SplitPaneLayout
-                  leftPane={<EditorPane questionId={activeExercise.id} boilerplate={activeExercise.boilerplate} />}
-                  topRightPane={<QuestionPanel challenge={activeChallenge} />}
-                  bottomRightPane={<TerminalPane currentQuestion={activeExercise} currentChallenge={activeChallenge} />}
+
+              {/* Desktop: full 3-column layout */}
+              <div className="hidden md:flex w-full h-full">
+                <Sidebar challenge={activeChallenge} />
+                <div className="flex-1 min-w-0 h-full relative">
+                  <SplitPaneLayout
+                    leftPane={<EditorPane questionId={activeExercise.id} boilerplate={activeExercise.boilerplate} />}
+                    topRightPane={<QuestionPanel challenge={activeChallenge} />}
+                    bottomRightPane={<TerminalPane currentQuestion={activeExercise} currentChallenge={activeChallenge} />}
+                  />
+                </div>
+              </div>
+
+              {/* Mobile: tab-based layout */}
+              <div className="flex md:hidden w-full h-full">
+                <MobileIDE
+                  challenge={activeChallenge}
+                  exercise={activeExercise}
                 />
               </div>
+
             </motion.div>
           );
         })()
