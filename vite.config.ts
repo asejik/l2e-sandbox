@@ -75,6 +75,56 @@ const goProxyPlugin = (apiKey: string) => ({
         }
       });
     });
+
+    server.middlewares.use('/api/validate', (req: any, res: any) => {
+      let body = '';
+      req.on('data', (chunk: string) => body += chunk);
+      req.on('end', async () => {
+        try {
+          const parsed = JSON.parse(body);
+
+          if (!apiKey) {
+            res.statusCode = 400;
+            res.end(JSON.stringify({ error: 'Groq API Key missing in environment.' }));
+            return;
+          }
+
+          const systemPrompt = `You are a friendly and encouraging Go programming mentor reviewing a student's written explanation.\n\nYour goal is to check whether the student has made a genuine attempt to explain the concept. Be generous and supportive.\n\nRules:\n- Reply ONLY with a valid JSON object in this exact shape: { "valid": true, "feedback": "..." } or { "valid": false, "feedback": "..." }\n- Set "valid" to TRUE if the student has made any reasonable attempt to explain the concept — even if incomplete or imperfect. Partial understanding is fine.\n- Set "valid" to FALSE ONLY if the answer is completely blank, total nonsense/gibberish, or entirely off-topic with zero relevance to the question.\n- The "feedback" field must always be warm and encouraging (1-2 sentences). If valid, celebrate what they got right. If invalid, gently hint at what direction to take.\n- Do NOT penalise imperfect phrasing, typos, or incomplete sentences. Reward effort.\n- Do NOT include any text outside the JSON object. No markdown, no code blocks.`;
+
+          const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+              model: 'llama-3.1-8b-instant',
+              messages: [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: `Question Title: ${parsed.title}\nQuestion Description: ${parsed.description}\n\nStudent's Answer (written as code comments):\n${parsed.answer}` }
+              ],
+              temperature: 0.2,
+              max_tokens: 200,
+            })
+          });
+
+          const data = await response.json() as any;
+          if (!response.ok) {
+            res.statusCode = response.status;
+            res.end(JSON.stringify({ error: data.error?.message || 'Groq API error' }));
+            return;
+          }
+
+          const content = data.choices?.[0]?.message?.content || '';
+          const result = JSON.parse(content.trim());
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify(result));
+        } catch (e: any) {
+          res.statusCode = 500;
+          res.end(JSON.stringify({ error: 'Validate proxy error: ' + e.message }));
+        }
+      });
+    });
   }
 });
 

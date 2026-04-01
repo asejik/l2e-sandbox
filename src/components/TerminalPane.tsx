@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { Play, Send, Loader2 } from 'lucide-react';
+import { Play, Send, Loader2, BrainCircuit } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAssessmentStore } from '../store/useAssessmentStore';
 import type { Challenge, Exercise } from '../store/useAssessmentStore';
@@ -16,6 +16,7 @@ export const TerminalPane: React.FC<Props> = ({ currentQuestion, currentChalleng
   const [errorMsg, setErrorMsg] = useState('');
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const [lastRunCode, setLastRunCode] = useState<string | null>(null);
+  const [isValidating, setIsValidating] = useState(false);
 
   const codeMap = useAssessmentStore((state) => state.userCode);
   const markCompleted = useAssessmentStore((state) => state.markCompleted);
@@ -27,6 +28,7 @@ export const TerminalPane: React.FC<Props> = ({ currentQuestion, currentChalleng
     setErrorMsg('');
     setLastRunCode(null);
     setShowFeedbackModal(false);
+    setIsValidating(false);
   }, [currentQuestion.id]);
 
   const currentCode = codeMap[currentQuestion.id] || currentQuestion.boilerplate;
@@ -118,14 +120,43 @@ export const TerminalPane: React.FC<Props> = ({ currentQuestion, currentChalleng
     }
 
     if (currentQuestion.isSubjective) {
-      const minRequired = (currentQuestion.minWords || 0) + currentQuestion.boilerplate.split(/\s+/).length;
-      const wordCount = currentCode.split(/\s+/).filter(w => w.length > 0).length;
-      if (currentQuestion.minWords && wordCount < minRequired) {
-        setErrorMsg(`Test Failed.\nSubjective Answer: Your explanation must be at least ${currentQuestion.minWords} new words long.\nYou currently added roughly ${wordCount - currentQuestion.boilerplate.split(/\s+/).length} words.`);
+      // Quick sanity check before hitting the API
+      const boilerplateWords = currentQuestion.boilerplate.split(/\s+/).filter(w => w.length > 0).length;
+      const totalWords = currentCode.split(/\s+/).filter(w => w.length > 0).length;
+      const newWords = totalWords - boilerplateWords;
+      const minWords = currentQuestion.minWords || 20;
+      if (newWords < minWords) {
+        setErrorMsg(`Test Failed.\nYour explanation is too short — only ~${newWords} new words detected.\nPlease write at least ${minWords} words explaining the concept.`);
         setOutput('');
         return;
       }
-      setShowFeedbackModal(true);
+
+      // AI validation
+      setIsValidating(true);
+      setErrorMsg('');
+      setOutput('');
+      try {
+        const res = await fetch('/api/validate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: currentQuestion.title,
+            description: currentQuestion.description,
+            answer: currentCode,
+          }),
+        });
+        const result = await res.json();
+        setIsValidating(false);
+        if (result.valid) {
+          setOutput(`✓ AI Mentor: ${result.feedback}`);
+          setShowFeedbackModal(true);
+        } else {
+          setErrorMsg(`Answer Not Accepted.\n\nAI Mentor Feedback:\n${result.feedback}\n\nPlease revise your explanation and resubmit.`);
+        }
+      } catch {
+        setIsValidating(false);
+        setErrorMsg('Could not reach the AI validator. Check your connection and try again.');
+      }
       return;
     }
 
@@ -148,47 +179,65 @@ export const TerminalPane: React.FC<Props> = ({ currentQuestion, currentChalleng
             <div className="w-3 h-3 rounded-full bg-zinc-700"></div>
           </div>
           <div className="flex gap-2">
-            <button
-              onClick={handleRun}
-              disabled={compileMutation.isPending}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-sans font-medium hover:bg-zinc-800 transition-colors text-zinc-300 disabled:opacity-50 border outline-none border-transparent"
-            >
-              {compileMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin text-zinc-500" /> : <Play className="w-4 h-4 text-zinc-400" />}
-              Run
-            </button>
+            {!currentQuestion.isSubjective && (
+              <button
+                onClick={handleRun}
+                disabled={compileMutation.isPending}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-sans font-medium hover:bg-zinc-800 transition-colors text-zinc-300 disabled:opacity-50 border outline-none border-transparent"
+              >
+                {compileMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin text-zinc-500" /> : <Play className="w-4 h-4 text-zinc-400" />}
+                Run
+              </button>
+            )}
             <button
               onClick={handleSubmit}
-              disabled={compileMutation.isPending}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-sans font-medium bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 transition-colors disabled:opacity-50 border outline-none border-emerald-500/20"
+              disabled={compileMutation.isPending || isValidating}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-sans font-medium transition-colors disabled:opacity-50 border outline-none
+                ${currentQuestion.isSubjective
+                  ? 'bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 border-indigo-500/20'
+                  : 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border-emerald-500/20'
+                }`}
             >
-              <Send className="w-4 h-4" />
-              Submit
+              {isValidating
+                ? <Loader2 className="w-4 h-4 animate-spin" />
+                : currentQuestion.isSubjective
+                  ? <BrainCircuit className="w-4 h-4" />
+                  : <Send className="w-4 h-4" />
+              }
+              {isValidating ? 'Reviewing…' : currentQuestion.isSubjective ? 'Submit to AI' : 'Submit'}
             </button>
           </div>
         </div>
 
         {/* Terminal Output */}
         <div className="flex-1 p-4 overflow-y-auto text-sm">
-          {compileMutation.isPending && !output && !errorMsg && (
+          {(compileMutation.isPending && !output && !errorMsg) && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-zinc-500 flex items-center gap-2">
                Compiling...
             </motion.div>
           )}
-          
+
+          {isValidating && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-indigo-400 flex items-center gap-2">
+              <BrainCircuit className="w-4 h-4 animate-pulse" />
+              AI is reviewing your answer…
+            </motion.div>
+          )}
+
           {errorMsg ? (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-400 whitespace-pre-wrap">
               {errorMsg}
             </motion.div>
           ) : output ? (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-zinc-300 whitespace-pre-wrap">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className={`whitespace-pre-wrap ${output.startsWith('✓') ? 'text-emerald-400' : 'text-zinc-300'}`}>
               {output}
             </motion.div>
           ) : null}
 
-          {!output && !errorMsg && !compileMutation.isPending && (
+          {!output && !errorMsg && !compileMutation.isPending && !isValidating && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-zinc-600">
-              $ go run main.go
-              <span className="block mt-2 opacity-50 pulse animate-pulse">_</span>
+              {currentQuestion.isSubjective ? '$ awaiting your explanation…' : '$ go run main.go'}
+              <span className="block mt-2 opacity-50 animate-pulse">_</span>
             </motion.div>
           )}
         </div>
