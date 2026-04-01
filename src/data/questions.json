@@ -5,11 +5,174 @@
     "description": "Introduction to the structure, logic, and basics of Golang.",
     "exercises": [
       {
-        "id": "fund-1",
-        "title": "01. Introduction",
-        "description": "Write a Hello World program.",
-        "boilerplate": "package main\n\nimport \"fmt\"\n\nfunc main() {\n\t// Print exactly \"Welcome to Go Fundamentals!\"\n}\n",
-        "expectedOutput": "Welcome to Go Fundamentals!\n"
+        "id": "fund-q01",
+        "title": "01. Hello World",
+        "description": "Every Go program starts with a main function. Write a program that prints exactly:\n\nWelcome to Go Fundamentals!\n\nRequirement: Use fmt.Println (not fmt.Printf) to print the message.",
+        "boilerplate": "// Requirement: Use fmt.Println to print the message.\n\npackage main\n\nimport \"fmt\"\n\nfunc main() {\n\t// Print exactly: Welcome to Go Fundamentals!\n}\n",
+        "expectedOutput": "Welcome to Go Fundamentals!\n",
+        "requiredCodeRegex": ["fmt\\.Println"]
+      },
+      {
+        "id": "fund-q02",
+        "title": "02. Declare Variables",
+        "description": "Declare a string variable named 'name' set to \"Gopher\" and an int variable named 'age' set to 25. Print them on one line.\n\nRequirement: Use variables named 'name' and 'age'.",
+        "boilerplate": "// Requirement:\n// Use variables named 'name' and 'age'.\n\npackage main\n\nimport \"fmt\"\n\nfunc main() {\n\t// Declare name = \"Gopher\" and age = 25\n\t// Then print: Name: Gopher, Age: 25\n}\n",
+        "expectedOutput": "Name: Gopher, Age: 25\n",
+        "requiredCodeRegex": ["\\bname\\b", "\\bage\\b"]
+      },
+      {
+        "id": "fund-q03",
+        "title": "03. Constants",
+        "description": "Declare a constant named 'MaxScore' with the value 100 and print it.\n\nRequirement: Use the 'const' keyword and name the constant 'MaxScore'.",
+        "boilerplate": "// Requirement:\n// Use the 'const' keyword and name the constant 'MaxScore'.\n\npackage main\n\nimport \"fmt\"\n\nfunc main() {\n\t// Declare a constant MaxScore = 100\n\t// Print: Max score is: 100\n}\n",
+        "expectedOutput": "Max score is: 100\n",
+        "requiredCodeRegex": ["\\bconst\\b", "\\bMaxScore\\b"]
+      },
+      {
+        "id": "fund-q04",
+        "title": "04. Explain package main",
+        "description": "Explain what 'package main' means in Go, why 'func main()' must exist, and what happens if you remove either of them.\n\nWrite your explanation in the comments below. You must reach the minimum word count.",
+        "boilerplate": "// Explain what 'package main' means, why 'func main()' must exist,\n// and what happens if you remove either of them.\n// Write your answer here:\n//\n// package main ...\n",
+        "expectedOutput": "",
+        "isSubjective": true,
+        "minWords": 25,
+        "requiredCodeRegex": ["(?:package main|func main)"]
+      },
+      {
+        "id": "fund-q05",
+        "title": "05. For Loop",
+        "description": "Write a function that sums all integers from 1 to n using a for loop.\n\nRequirement: Use a variable named 'sum' to accumulate the total, and 'i' as the loop variable.",
+        "boilerplate": "// Requirement:\n// Use a variable named 'sum' and loop variable 'i'.\n\npackage main\n\nimport \"fmt\"\n\n// Example - Input: 5 -> Expected Output: 15 (1+2+3+4+5)\nfunc sumTo(n int) int {\n\t// your code here\n\treturn 0\n}\n\nfunc main() {\n\tfmt.Printf(\"sumTo(5) -> %v\\n\", sumTo(5))\n}\n",
+        "expectedOutput": "sumTo(5) -> 15\n",
+        "requiredCodeRegex": ["\\bsum\\b", "\\bi\\b"]
+      },
+      {
+        "id": "fund-q06",
+        "title": "06. If / Else",
+        "description": "Write a function that returns \"even\" or \"odd\" for a given integer.\n\nRequirement: Use a variable named 'result' to store the answer before returning it.",
+        "boilerplate": "// Requirement:\n// Use a variable named 'result' to hold \"even\" or \"odd\".\n\npackage main\n\nimport \"fmt\"\n\n// Example 1 - Input: 4 -> Expected Output: \"even\"\n// Example 2 - Input: 7 -> Expected Output: \"odd\"\nfunc isEvenOrOdd(n int) string {\n\t// your code here\n\treturn \"\"\n}\n\nfunc main() {\n\tfmt.Printf(\"isEvenOrOdd(4) -> %q\\n\", isEvenOrOdd(4))\n\tfmt.Printf(\"isEvenOrOdd(7) -> %q\\n\", isEvenOrOdd(7))\n}\n",
+        "expectedOutput": "isEvenOrOdd(4) -> \"even\"\nisEvenOrOdd(7) -> \"odd\"\n",
+        "requiredCodeRegex": ["\\bresult\\b"]
+      },
+      {
+        "id": "fund-q07",
+        "title": "07. Multiple Return Values",
+        "description": "Write a function that returns both the sum and the product of two integers.\n\nRequirement: Name your return variables 'sum' and 'product'.",
+        "boilerplate": "// Requirement:\n// Name the return variables 'sum' and 'product'.\n\npackage main\n\nimport \"fmt\"\n\n// Example - Input: 3, 4 -> Expected Output: 7, 12\nfunc sumAndProduct(a, b int) (int, int) {\n\t// your code here\n\treturn 0, 0\n}\n\nfunc main() {\n\ts, p := sumAndProduct(3, 4)\n\tfmt.Printf(\"sumAndProduct(3, 4) -> %v, %v\\n\", s, p)\n}\n",
+        "expectedOutput": "sumAndProduct(3, 4) -> 7, 12\n",
+        "requiredCodeRegex": ["\\bsum\\b", "\\bproduct\\b"]
+      },
+      {
+        "id": "fund-q08",
+        "title": "08. Explain the fmt Package",
+        "description": "Explain the difference between fmt.Println, fmt.Printf, and fmt.Sprintf. When would you use each one?\n\nWrite your explanation in the comments below. You must reach the minimum word count.",
+        "boilerplate": "// Explain the difference between fmt.Println, fmt.Printf, and fmt.Sprintf.\n// When would you use each one?\n// Write your answer here:\n//\n// fmt.Println ...\n// fmt.Printf ...\n// fmt.Sprintf ...\n",
+        "expectedOutput": "",
+        "isSubjective": true,
+        "minWords": 25,
+        "requiredCodeRegex": ["(?:Println|Printf|Sprintf)"]
+      },
+      {
+        "id": "fund-q09",
+        "title": "09. Slices — Find the Max",
+        "description": "Write a function that finds the maximum value in a slice of integers.\n\nRequirement: Name the slice parameter 'numbers' and the tracking variable 'max'.",
+        "boilerplate": "// Requirement:\n// Name the slice parameter 'numbers' and tracking variable 'max'.\n\npackage main\n\nimport \"fmt\"\n\n// Example - Input: [3, 1, 4, 1, 5] -> Expected Output: 5\nfunc maxOf(numbers []int) int {\n\t// your code here\n\treturn 0\n}\n\nfunc main() {\n\tnums := []int{3, 1, 4, 1, 5}\n\tfmt.Printf(\"maxOf(%v) -> %v\\n\", nums, maxOf(nums))\n}\n",
+        "expectedOutput": "maxOf([3 1 4 1 5]) -> 5\n",
+        "requiredCodeRegex": ["\\bnumbers\\b", "\\bmax\\b"]
+      },
+      {
+        "id": "fund-q10",
+        "title": "10. Maps",
+        "description": "Create a map named 'countries' that maps country codes (strings) to country names (strings). Include at least: \"NG\" -> \"Nigeria\", \"US\" -> \"United States\".\n\nRequirement: Name the map variable 'countries'.",
+        "boilerplate": "// Requirement:\n// Name the map variable 'countries'.\n\npackage main\n\nimport \"fmt\"\n\nfunc main() {\n\t// Declare a map[string]string named 'countries'\n\t// Include: \"NG\" -> \"Nigeria\", \"US\" -> \"United States\", \"GB\" -> \"United Kingdom\"\n\n\tkey := \"NG\"\n\tfmt.Printf(\"countries[%q] -> %q\\n\", key, countries[key])\n}\n",
+        "expectedOutput": "countries[\"NG\"] -> \"Nigeria\"\n",
+        "requiredCodeRegex": ["\\bcountries\\b"]
+      },
+      {
+        "id": "fund-q11",
+        "title": "11. Structs",
+        "description": "Define a struct named 'Person' with two fields: 'Name' (string) and 'Age' (int). Create a Person and print it.\n\nRequirement: The struct must be named 'Person' with fields 'Name' and 'Age'.",
+        "boilerplate": "// Requirement:\n// Define a struct named 'Person' with fields 'Name' (string) and 'Age' (int).\n\npackage main\n\nimport \"fmt\"\n\n// Define your Person struct here\n\nfunc main() {\n\t// Create a Person: Name = \"Alice\", Age = 30\n\t// Print: Person: {Alice 30}\n}\n",
+        "expectedOutput": "Person: {Alice 30}\n",
+        "requiredCodeRegex": ["\\bPerson\\b", "\\bName\\b", "\\bAge\\b"]
+      },
+      {
+        "id": "fund-q12",
+        "title": "12. Pointers",
+        "description": "Write a function named 'doubleValue' that takes a pointer to an int and doubles the value it points to.\n\nRequirement: The function must use a *int parameter. Pass the address using '&'.",
+        "boilerplate": "// Requirement:\n// Use a pointer (*int) parameter. Pass the address using '&'.\n\npackage main\n\nimport \"fmt\"\n\nfunc doubleValue(n *int) {\n\t// your code here\n}\n\nfunc main() {\n\tnum := 5\n\tfmt.Printf(\"Before: %v, \", num)\n\tdoubleValue(&num)\n\tfmt.Printf(\"After: %v\\n\", num)\n}\n",
+        "expectedOutput": "Before: 5, After: 10\n",
+        "requiredCodeRegex": ["\\*int", "&\\w+"]
+      },
+      {
+        "id": "fund-q13",
+        "title": "13. Explain Pointers",
+        "description": "Explain what a pointer is in Go. Describe what the '&' and '*' operators do, and give one practical use case for pointers.\n\nWrite your explanation in the comments below. You must reach the minimum word count.",
+        "boilerplate": "// Explain what a pointer is in Go.\n// Describe what '&' and '*' do, and give one practical use case.\n// Write your answer here:\n//\n// A pointer ...\n",
+        "expectedOutput": "",
+        "isSubjective": true,
+        "minWords": 25,
+        "requiredCodeRegex": ["(?:pointer|\\*int|&)"]
+      },
+      {
+        "id": "fund-q14",
+        "title": "14. Error Handling",
+        "description": "Write a function 'divide' that divides two integers and returns an error if the divisor is zero.\n\nRequirement: Use a variable named 'err' and create the error using errors.New().",
+        "boilerplate": "// Requirement:\n// Use a variable named 'err' and errors.New() to create the error.\n\npackage main\n\nimport (\n\t\"errors\"\n\t\"fmt\"\n)\n\n// Example 1 - divide(10, 2) -> 5, <nil>\n// Example 2 - divide(10, 0) -> 0, division by zero\nfunc divide(a, b int) (int, error) {\n\t// your code here\n\treturn 0, nil\n}\n\nfunc main() {\n\tresult, err := divide(10, 2)\n\tfmt.Printf(\"divide(10, 2) -> %v, %v\\n\", result, err)\n\tresult, err = divide(10, 0)\n\tfmt.Printf(\"divide(10, 0) -> %v, %v\\n\", result, err)\n}\n",
+        "expectedOutput": "divide(10, 2) -> 5, <nil>\ndivide(10, 0) -> 0, division by zero\n",
+        "requiredCodeRegex": ["\\berr\\b", "errors\\.New"]
+      },
+      {
+        "id": "fund-q15",
+        "title": "15. String Conversion",
+        "description": "Write two functions: 'intToStr' that converts an int to a string using strconv.Itoa, and 'strToInt' that converts a string to an int using strconv.Atoi.\n\nRequirement: Store the Itoa result in a variable named 'result'.",
+        "boilerplate": "// Requirement:\n// Store the Itoa result in a variable named 'result'.\n\npackage main\n\nimport (\n\t\"fmt\"\n\t\"strconv\"\n)\n\n// Example - Input: 42 -> Expected Output: \"42\"\nfunc intToStr(n int) string {\n\t// Use strconv.Itoa, store in 'result'\n\treturn \"\"\n}\n\n// Example - Input: \"99\" -> Expected Output: 99\nfunc strToInt(s string) int {\n\t// Use strconv.Atoi (ignore the error for now)\n\treturn 0\n}\n\nfunc main() {\n\tfmt.Printf(\"intToStr(42) -> %q\\n\", intToStr(42))\n\tv := \"99\"\n\tfmt.Printf(\"strToInt(%q) -> %v\\n\", v, strToInt(v))\n}\n",
+        "expectedOutput": "intToStr(42) -> \"42\"\nstrToInt(\"99\") -> 99\n",
+        "requiredCodeRegex": ["strconv\\.Itoa", "strconv\\.Atoi", "\\bresult\\b"]
+      },
+      {
+        "id": "fund-q16",
+        "title": "16. Explain Arrays vs Slices",
+        "description": "Explain the key differences between arrays and slices in Go. Include: fixed vs dynamic size, how they are declared, and when you'd prefer one over the other.\n\nWrite your explanation in the comments. You must reach the minimum word count.",
+        "boilerplate": "// Explain the key differences between arrays and slices in Go.\n// Cover: fixed vs dynamic size, declaration, and when to use each.\n// Write your answer here:\n//\n// Arrays ...\n// Slices ...\n",
+        "expectedOutput": "",
+        "isSubjective": true,
+        "minWords": 30,
+        "requiredCodeRegex": ["(?:array|slice|\\[\\])"]
+      },
+      {
+        "id": "fund-q17",
+        "title": "17. Variadic Functions",
+        "description": "Write a function 'average' that accepts a variadic number of integers and returns their integer average.\n\nRequirement: Use '...int' for the parameter. Use a variable named 'total' to accumulate the sum.",
+        "boilerplate": "// Requirement:\n// Use '...int' for the parameter and variable 'total' for the sum.\n\npackage main\n\nimport \"fmt\"\n\n// Example - Input: 1, 2, 3, 4, 5 -> Expected Output: 3\nfunc average(nums ...int) int {\n\t// your code here\n\treturn 0\n}\n\nfunc main() {\n\tfmt.Printf(\"average(1, 2, 3, 4, 5) -> %v\\n\", average(1, 2, 3, 4, 5))\n}\n",
+        "expectedOutput": "average(1, 2, 3, 4, 5) -> 3\n",
+        "requiredCodeRegex": ["\\.\\.\\.int", "\\btotal\\b"]
+      },
+      {
+        "id": "fund-q18",
+        "title": "18. Defer",
+        "description": "Write a function 'runTask' that prints \"start\", then uses defer to automatically print \"end\" after the function body finishes.\n\nRequirement: The word 'end' must be printed via a deferred call.",
+        "boilerplate": "// Requirement:\n// Use 'defer' so that \"end\" prints after the rest of the function body.\n\npackage main\n\nimport \"fmt\"\n\nfunc runTask() {\n\t// Use defer here to print \"end\"\n\tfmt.Println(\"start\")\n\t// your code here\n}\n\nfunc main() {\n\trunTask()\n}\n",
+        "expectedOutput": "start\nend\n",
+        "requiredCodeRegex": ["\\bdefer\\b"]
+      },
+      {
+        "id": "fund-q19",
+        "title": "19. Explain Defer",
+        "description": "Explain what the 'defer' keyword does in Go. When does a deferred call execute? Give one real-world use case (e.g. closing a file).\n\nWrite your explanation in the comments. You must reach the minimum word count.",
+        "boilerplate": "// Explain what 'defer' does in Go.\n// When does a deferred call execute?\n// Give one real-world use case.\n// Write your answer here:\n//\n// defer ...\n",
+        "expectedOutput": "",
+        "isSubjective": true,
+        "minWords": 25,
+        "requiredCodeRegex": ["\\bdefer\\b"]
+      },
+      {
+        "id": "fund-q20",
+        "title": "20. Range Loop — Count Vowels",
+        "description": "Write a function that counts the number of vowels (a, e, i, o, u) in a string using a range loop.\n\nRequirement: Use a variable named 'count', a variable named 'vowels' for the vowel collection, and loop with 'range'.",
+        "boilerplate": "// Requirement:\n// Use variables 'count' and 'vowels', and loop with 'range'.\n\npackage main\n\nimport \"fmt\"\n\n// Example - Input: \"hello world\" -> Expected Output: 3 (e, o, o)\nfunc countVowels(s string) int {\n\t// your code here\n\treturn 0\n}\n\nfunc main() {\n\tfmt.Printf(\"countVowels(\\\"hello world\\\") -> %v\\n\", countVowels(\"hello world\"))\n}\n",
+        "expectedOutput": "countVowels(\"hello world\") -> 3\n",
+        "requiredCodeRegex": ["\\bcount\\b", "\\bvowels\\b", "\\brange\\b"]
       }
     ]
   },
