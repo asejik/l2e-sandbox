@@ -92,7 +92,7 @@
     "description": "Learn parsing and advanced string manipulation by printing ASCII graphics.",
     "exercises": [
       {
-        "id": "ascii-1",
+        "id": "asc-q01",
         "title": "01. Format Literal Newlines",
         "description": "Write a function that replaces literal newlines with actual newlines.\nThe program must handle an input containing `\\n`. Find occurrences of the literal characters `\\` and `n` and replace them with an actual newline character.\n\nRequirement: Please use a variable named 'formatted' for the output string.",
         "boilerplate": "// Requirement: Please use a variable named 'formatted' for the output string.\n\npackage main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\n// Example 1 - Input: `Hello\\nThere` -> Expected Output: \"Hello\\nThere\"\nfunc formatLiteralNewlines(input string) string {\n\t// your code here\n\treturn \"\"\n}\n\nfunc main() {\n\tfmt.Printf(\"formatLiteralNewlines(...) -> %q\\n\", formatLiteralNewlines(\"Hello\\\\nThere\"))\n}\n",
@@ -100,7 +100,7 @@
         "requiredCodeRegex": ["\\bformatted\\b", "strings\\.Replace"]
       },
       {
-        "id": "ascii-2",
+        "id": "asc-q02",
         "title": "02. Validate Printable ASCII",
         "description": "Write a function that validates if a string contains only printable ASCII characters.\nEnsure all characters are between ASCII 32 (space) and ASCII 126 (`~`).\n\nRequirement: Name the return variable 'isValid' and loop using '_, char'.",
         "boilerplate": "// Requirement:\n// Name the return variable 'isValid' and loop using '_, char'.\n\npackage main\n\nimport \"fmt\"\n\n// Example 1 - Input: \"Hello\" -> Expected Output: true\n// Example 2 - Input: \"Héllø\" -> Expected Output: false\nfunc isPrintableASCII(s string) bool {\n\t// your code here\n\treturn false\n}\n\nfunc main() {\n\tfmt.Printf(\"isPrintableASCII(\\\"Hello\\\") -> %v\\n\", isPrintableASCII(\"Hello\"))\n\tfmt.Printf(\"isPrintableASCII(\\\"Héllø\\\") -> %v\\n\", isPrintableASCII(\"Héllø\"))\n}\n",
@@ -108,7 +108,7 @@
         "requiredCodeRegex": ["\\bisValid\\b", "_,\\s*char"]
       },
       {
-        "id": "ascii-3",
+        "id": "asc-q03",
         "title": "03. Calculate Character Start Line",
         "description": "Write a function that calculates the starting line of a character in the banner file.\nEach character has a height of 8 lines, and characters are separated by a new line. Calculate the starting index (line number) in the file array for a given ASCII character.\n\nRequirement: Use a variable named 'asciiOffset' to hold the math calculation.",
         "boilerplate": "// Requirement:\n// Use a variable named 'asciiOffset' to hold the math calculation.\n\npackage main\n\nimport \"fmt\"\n\n// Example 1 - Input: ' ' (ASCII 32) -> Expected Output: 1\n// Example 2 - Input: '!' (ASCII 33) -> Expected Output: 10\nfunc calculateStartLine(char rune) int {\n\t// your code here\n\treturn 0\n}\n\nfunc main() {\n\tfmt.Printf(\"calculateStartLine(' ') -> %v\\n\", calculateStartLine(' '))\n\tfmt.Printf(\"calculateStartLine('!') -> %v\\n\", calculateStartLine('!'))\n}\n",
@@ -116,7 +116,7 @@
         "requiredCodeRegex": ["\\basciiOffset\\b"]
       },
       {
-        "id": "ascii-4",
+        "id": "asc-q04",
         "title": "04. Explain os.ReadFile()",
         "description": "Explain what os.ReadFile() does, what it returns, and why it is essential for reading the standard.txt banner file while adhering to the allowed standard Go packages rule.\n\nWrite your explanation in the comments. You must reach the minimum word count.",
         "boilerplate": "// Explain what os.ReadFile() does, what it returns, and why it is\n// essential for reading the standard.txt banner file.\n// Write your answer here:\n//\n// os.ReadFile() ...\n",
@@ -126,7 +126,7 @@
         "requiredCodeRegex": ["(?:os\\.ReadFile|ReadFile)"]
       },
       {
-        "id": "ascii-5",
+        "id": "asc-q05",
         "title": "05. Extract 8 Lines for a Character",
         "description": "Write a function that extracts exactly 8 lines for a specific character.\nGiven a slice of strings representing the entire banner file and a starting index, extract the 8 lines of the specific character.\n\nRequirement: Declare a slice named 'charLines' and use a standard 'for' loop to append exactly 8 lines.",
         "boilerplate": "// Requirement:\n// Declare a slice named 'charLines' and use a standard 'for' loop to append exactly 8 lines.\n\npackage main\n\nimport \"fmt\"\n\n// Example - Input: fileLines = [\"\", \"line1\", ... \"line8\"], start = 1\n// Expected Output: [\"line1\", \"line2\", \"line3\", \"line4\", \"line5\", \"line6\", \"line7\", \"line8\"]\nfunc extractChar(fileLines []string, startLine int) []string {\n\t// your code here\n\treturn nil\n}\n\nfunc main() {\n\tmockFile := []string{\"\", \"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\", \"\", \"10\"}\n\tfmt.Printf(\"extractChar(...) -> %v\\n\", extractChar(mockFile, 1))\n}\n",
@@ -134,7 +134,7 @@
         "requiredCodeRegex": ["\\bcharLines\\b", "for\\s+\\w+\\s*:?=\\s*0"]
       },
       {
-        "id": "ascii-6",
+        "id": "asc-q06",
         "title": "06. Check Only Newlines",
         "description": "Write a function that handles an edge case of only newlines.\nIf the argument passed is exactly `\\n`, the program should just print an empty newline. Write a function to check if the input string consists *only* of newlines.\n\nRequirement: Use a variable named 'isOnlyNewlines' and return it.",
         "boilerplate": "// Requirement:\n// Use a variable named 'isOnlyNewlines' and return it.\n\npackage main\n\nimport \"fmt\"\n\n// Example 1 - Input: \"\\n\\n\" -> Expected Output: true\n// Example 2 - Input: \"\\nHello\" -> Expected Output: false\nfunc checkOnlyNewlines(s string) bool {\n\t// your code here\n\treturn false\n}\n\nfunc main() {\n\tfmt.Printf(\"checkOnlyNewlines(\\\"\\\\n\\\\n\\\") -> %v\\n\", checkOnlyNewlines(\"\\n\\n\"))\n\tfmt.Printf(\"checkOnlyNewlines(\\\"\\\\nHello\\\") -> %v\\n\", checkOnlyNewlines(\"\\nHello\"))\n}\n",
@@ -142,7 +142,7 @@
         "requiredCodeRegex": ["\\bisOnlyNewlines\\b"]
       },
       {
-        "id": "ascii-7",
+        "id": "asc-q07",
         "title": "07. Split File Content Into Lines",
         "description": "Write a function that splits file content into lines based on newline characters.\nWhen reading the banner file, it must be split into an array of strings. Handle both Unix (`\\n`) and Windows (`\\r\\n`) line endings.\n\nRequirement: Use 'strings.ReplaceAll' to normalize '\\r\\n' to '\\n' before splitting.",
         "boilerplate": "// Requirement:\n// Use 'strings.ReplaceAll' to normalize '\\r\\n' to '\\n' before splitting.\n\npackage main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\n// Example - Input: \"line1\\r\\nline2\\nline3\" -> Expected Output: [\"line1\", \"line2\", \"line3\"]\nfunc splitFileToLines(content string) []string {\n\t// your code here\n\treturn nil\n}\n\nfunc main() {\n\tfmt.Printf(\"splitFileToLines(...) -> %q\\n\", splitFileToLines(\"line1\\r\\nline2\\nline3\"))\n}\n",
@@ -150,7 +150,7 @@
         "requiredCodeRegex": ["strings\\.ReplaceAll", "strings\\.Split"]
       },
       {
-        "id": "ascii-8",
+        "id": "asc-q08",
         "title": "08. Explain strings.Builder",
         "description": "Explain what strings.Builder does, how it compares to standard string concatenation (using the '+' operator), and why it is highly recommended for building the horizontal ASCII rows.\n\nWrite your explanation in the comments. You must reach the minimum word count.",
         "boilerplate": "// Explain what strings.Builder does, how it compares to string\n// concatenation with '+', and why it is better for building ASCII rows.\n// Write your answer here:\n//\n// strings.Builder ...\n",
@@ -160,7 +160,7 @@
         "requiredCodeRegex": ["(?:strings\\.Builder|Builder)"]
       },
       {
-        "id": "ascii-9",
+        "id": "asc-q09",
         "title": "09. Split Input by Newline",
         "description": "Write a function that splits the user argument by newlines.\nThe input string may contain multiple words separated by `\\n` (e.g., \"Hello\\nThere\"). Split the string by the newline character to process each word separately.\n\nRequirement: Please use a variable named 'words' for the slice of strings.",
         "boilerplate": "// Requirement:\n// Please use a variable named 'words' for the slice of strings.\n\npackage main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\n// Example - Input: \"Hello\\nThere\" -> Expected Output: [\"Hello\", \"There\"]\nfunc splitInputByNewline(input string) []string {\n\t// your code here\n\treturn nil\n}\n\nfunc main() {\n\tfmt.Printf(\"splitInputByNewline(...) -> %q\\n\", splitInputByNewline(\"Hello\\nThere\"))\n}\n",
@@ -168,7 +168,7 @@
         "requiredCodeRegex": ["\\bwords\\b", "strings\\.Split"]
       },
       {
-        "id": "ascii-10",
+        "id": "asc-q10",
         "title": "10. Initialize Output Lines",
         "description": "Write a function that initializes an array of 8 empty strings.\nTo build the ASCII representation of a word horizontally, you need an array to hold the 8 lines.\n\nRequirement: Name the return variable 'outputLines' and define it with a length of 8.",
         "boilerplate": "// Requirement:\n// Name the return variable 'outputLines' and define it with a length of 8.\n\npackage main\n\nimport \"fmt\"\n\nfunc initOutputLines() []string {\n\t// your code here\n\treturn nil\n}\n\nfunc main() {\n\tfmt.Printf(\"initOutputLines() -> %q (len: %d)\\n\", initOutputLines(), len(initOutputLines()))\n}\n",
@@ -176,7 +176,7 @@
         "requiredCodeRegex": ["\\boutputLines\\b", "make\\(\\[\\]string,\\s*8\\)|\\[\\]string\\{.*\\}"]
       },
       {
-        "id": "ascii-11",
+        "id": "asc-q11",
         "title": "11. Append Character Horizontally",
         "description": "Write a function that appends a character's ASCII lines to the output array.\nGiven the 8 lines of an ASCII character and the current 8 lines of the output string, append the character's lines horizontally.\n\nRequirement: Loop from 0 to 7 using variable 'i', and append 'charLines[i]' to 'outputLines[i]'.",
         "boilerplate": "// Requirement:\n// Loop from 0 to 7 using variable 'i', and append 'charLines[i]' to 'outputLines[i]'.\n\npackage main\n\nimport \"fmt\"\n\n// Example - Input: outputLines (8 empty strings), charLines (8 lines)\nfunc appendCharHorizontally(outputLines []string, charLines []string) []string {\n\t// your code here\n\treturn nil\n}\n\nfunc main() {\n\tout := []string{\"\", \"\", \"\", \"\", \"\", \"\", \"\", \"\"}\n\tcharLines := []string{\"1\", \"2\", \"3\", \"4\", \"5\", \"6\", \"7\", \"8\"}\n\tfmt.Printf(\"appendCharHorizontally(...) -> %q\\n\", appendCharHorizontally(out, charLines))\n}\n",
@@ -184,7 +184,7 @@
         "requiredCodeRegex": ["\\bi\\b", "charLines\\[i\\]", "outputLines\\[i\\]"]
       },
       {
-        "id": "ascii-12",
+        "id": "asc-q12",
         "title": "12. Explain the Go fs API",
         "description": "The project instructions state this project will help you learn about the Go file system (fs) API. Explain what this API does and list two common functions used from the `os` package for data manipulation.\n\nWrite your explanation in the comments. You must reach the minimum word count.",
         "boilerplate": "// Explain what the Go file system (fs) API does and list two common\n// functions from the 'os' package used for data manipulation.\n// Write your answer here:\n//\n// The Go fs API ...\n",
@@ -194,7 +194,7 @@
         "requiredCodeRegex": ["(?:os\\.|file system|fs API|ReadFile|WriteFile)"]
       },
       {
-        "id": "ascii-13",
+        "id": "asc-q13",
         "title": "13. Print ASCII Word Lines",
         "description": "Write a function that prints the generated horizontal ASCII lines.\nOnce a word's 8 lines are generated, they must be printed separated by actual newlines.\n\nRequirement: Iterate through 'outputLines' and use 'fmt.Println'. Return nothing.",
         "boilerplate": "// Requirement:\n// Iterate through 'outputLines' and use 'fmt.Println'. Return nothing.\n\npackage main\n\nimport \"fmt\"\n\nfunc printAsciiWord(outputLines []string) {\n\t// your code here\n}\n\nfunc main() {\n\tlines := []string{\"row1\", \"row2\", \"row3\", \"row4\", \"row5\", \"row6\", \"row7\", \"row8\"}\n\tprintAsciiWord(lines)\n}\n",
@@ -202,7 +202,7 @@
         "requiredCodeRegex": ["fmt\\.Println", "\\boutputLines\\b|range"]
       },
       {
-        "id": "ascii-14",
+        "id": "asc-q14",
         "title": "14. Validate Banner File Length",
         "description": "Write a function to check if the banner file is valid.\nA standard banner file requires 855 lines to hold all ASCII characters from 32 to 126 (each takes 9 lines: 8 content + 1 separator).\n\nRequirement: Use a variable named 'lineCount' to store the length of the slice before checking.",
         "boilerplate": "// Requirement:\n// Use a variable named 'lineCount' to store the length of the slice before checking.\n\npackage main\n\nimport \"fmt\"\n\n// Example 1 - Input: Slice of length 855 -> Expected Output: true\n// Example 2 - Input: Slice of length 100 -> Expected Output: false\nfunc isValidBannerLength(fileLines []string) bool {\n\t// your code here\n\treturn false\n}\n\nfunc main() {\n\tfmt.Printf(\"isValidBannerLength(855 lines) -> %v\\n\", isValidBannerLength(make([]string, 855)))\n\tfmt.Printf(\"isValidBannerLength(100 lines) -> %v\\n\", isValidBannerLength(make([]string, 100)))\n}\n",
@@ -210,7 +210,7 @@
         "requiredCodeRegex": ["\\blineCount\\b", "855"]
       },
       {
-        "id": "ascii-15",
+        "id": "asc-q15",
         "title": "15. Handle Empty String Input",
         "description": "Write a function that handles empty string inputs.\nIf the argument passed is an empty string `\"\"`, the program should not print anything.\n\nRequirement: Use a simple 'if' check. Return true if the string is empty, otherwise false.",
         "boilerplate": "// Requirement:\n// Use a simple 'if' check. Return true if the string is empty, otherwise false.\n\npackage main\n\nimport \"fmt\"\n\n// Example 1 - Input: \"\" -> Expected Output: true\n// Example 2 - Input: \"Hello\" -> Expected Output: false\nfunc isEmptyInput(input string) bool {\n\t// your code here\n\treturn false\n}\n\nfunc main() {\n\tfmt.Printf(\"isEmptyInput(\\\"\\\") -> %v\\n\", isEmptyInput(\"\"))\n\tfmt.Printf(\"isEmptyInput(\\\"Hello\\\") -> %v\\n\", isEmptyInput(\"Hello\"))\n}\n",
@@ -218,7 +218,7 @@
         "requiredCodeRegex": ["\\bif\\b"]
       },
       {
-        "id": "ascii-16",
+        "id": "asc-q16",
         "title": "16. Explain os.Args",
         "description": "Explain what `os.Args` is in Go, why `os.Args[0]` is ignored in this project, and how you ensure the program doesn't panic when a user runs `go run .` without passing any arguments.\n\nWrite your explanation in the comments. You must reach the minimum word count.",
         "boilerplate": "// Explain what os.Args is in Go, why os.Args[0] is ignored,\n// and how to safely handle missing arguments.\n// Write your answer here:\n//\n// os.Args ...\n",
@@ -228,7 +228,7 @@
         "requiredCodeRegex": ["(?:os\\.Args|Args\\[0\\]|len\\(os)"]
       },
       {
-        "id": "ascii-17",
+        "id": "asc-q17",
         "title": "17. Handle Consecutive Newlines",
         "description": "When input contains consecutive newlines like `\"Hello\\n\\nThere\"`, strings.Split yields an empty string `[\"Hello\", \"\", \"There\"]`. Write a function that returns true if a word in the slice is an empty string, indicating an isolated newline should be printed.\n\nRequirement: Name the return variable 'shouldPrintEmptyLine'.",
         "boilerplate": "// Requirement:\n// Name the return variable 'shouldPrintEmptyLine'.\n\npackage main\n\nimport \"fmt\"\n\n// Example 1 - Input: \"\" -> Expected Output: true\n// Example 2 - Input: \"Hello\" -> Expected Output: false\nfunc isConsecutiveNewline(word string) bool {\n\t// your code here\n\treturn false\n}\n\nfunc main() {\n\tfmt.Printf(\"isConsecutiveNewline(\\\"\\\") -> %v\\n\", isConsecutiveNewline(\"\"))\n\tfmt.Printf(\"isConsecutiveNewline(\\\"Hello\\\") -> %v\\n\", isConsecutiveNewline(\"Hello\"))\n}\n",
@@ -236,7 +236,7 @@
         "requiredCodeRegex": ["\\bshouldPrintEmptyLine\\b"]
       },
       {
-        "id": "ascii-18",
+        "id": "asc-q18",
         "title": "18. Generate Spaces String",
         "description": "Write a function that generates a string of spaces based on a multiplier.\nWrite a function that returns a string consisting of `n` spaces.\n\nRequirement: You must use 'strings.Repeat' and store the result in a variable named 'spaceStr'.",
         "boilerplate": "// Requirement:\n// You must use 'strings.Repeat' and store the result in a variable named 'spaceStr'.\n\npackage main\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n)\n\n// Example - Input: 4 -> Expected Output: \"    \"\nfunc generateSpaces(n int) string {\n\t// your code here\n\treturn \"\"\n}\n\nfunc main() {\n\tfmt.Printf(\"generateSpaces(4) -> %q\\n\", generateSpaces(4))\n}\n",
@@ -244,7 +244,7 @@
         "requiredCodeRegex": ["\\bspaceStr\\b", "strings\\.Repeat"]
       },
       {
-        "id": "ascii-19",
+        "id": "asc-q19",
         "title": "19. Explain Good Practices",
         "description": "The project states the code must respect good practices. Name three common Go formatting or structural rules (like using gofmt, descriptive variable names, or proper error handling) that would be evaluated during an audit.\n\nWrite your explanation in the comments. You must reach the minimum word count.",
         "boilerplate": "// Name three Go good practices that would be evaluated during an audit.\n// Write your answer here:\n//\n// 1. ...\n// 2. ...\n// 3. ...\n",
@@ -254,7 +254,7 @@
         "requiredCodeRegex": ["(?:gofmt|error handling|variable name|descriptive|lint|format)"]
       },
       {
-        "id": "ascii-20",
+        "id": "asc-q20",
         "title": "20. Master Process Word Function",
         "description": "Write a master execution function that ties it all together for one word.\nWrite a function that takes a word (like \"hello\"), reads a mock `fileLines` array, and returns the fully assembled `outputLines` array (length 8). Assume `calculateStartLine` and `extractChar` exist.\n\nRequirement: Define the variable 'finalOutput' using 'initOutputLines'. Loop over each rune in the word.",
         "boilerplate": "// Requirement:\n// Define the variable 'finalOutput' using 'initOutputLines'. Loop over each rune in the word.\n\npackage main\n\nimport \"fmt\"\n\nfunc calculateStartLine(char rune) int {\n\treturn int(char-32)*9 + 1\n}\n\nfunc extractChar(fileLines []string, startLine int) []string {\n\tcharLines := []string{}\n\tfor i := 0; i < 8; i++ {\n\t\tif startLine+i < len(fileLines) {\n\t\t\tcharLines = append(charLines, fileLines[startLine+i])\n\t\t}\n\t}\n\treturn charLines\n}\n\nfunc initOutputLines() []string {\n\treturn make([]string, 8)\n}\n\nfunc processWord(word string, fileLines []string) []string {\n\t// your code here\n\treturn nil\n}\n\nfunc main() {\n\tmockFile := make([]string, 855)\n\tfmt.Printf(\"processWord(\\\"A\\\", ...) array length -> %v\\n\", len(processWord(\"A\", mockFile)))\n}\n",
